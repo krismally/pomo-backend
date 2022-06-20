@@ -9,8 +9,6 @@ const oldTaskSchema = new Schema({
     oldTask: Array
 });
 
-// Creates Model
-const OldTask = mongoose.model('OldTask', oldTaskSchema)
 
 // Export Model
-module.exports = OldTask;
+module.exports = mongoose.model('OldTask', oldTaskSchema)
