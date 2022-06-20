@@ -1,18 +1,12 @@
-// Require Dependencies
+// Require Mongoose
 const mongoose = require('mongoose');
 
-// Initializes Shortcut Variable
-const Schema = mongoose.Schema;
-
 // Initializes Schema
-const pomodoroSchema = newSchema({
+const pomodoroSchema = mongoose.Schema({
     focusTime: Number,
     breakTime: Number,
     sessionTotal: Number
 });
 
-// Creates Model
-const Pomodoro = mongoose.model('Pomodoro', pomodoroSchema);
-
 // Export Model
-module.exports = Pomodoro;
+module.exports = mongoose.model('Pomodoro', pomodoroSchema);
