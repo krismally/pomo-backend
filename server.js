@@ -1,21 +1,47 @@
+// Configure App Settings
+require ('dotenv').config();
+
 // Dependencies
-// Get .env variables
-require ('dotenv').config()
+const express = require('express');
+const mongoose  = require('mongoose');
+const morgan = require('morgan');
+const cors = require('cors');
+const app = express();
+const db = mongoose.connection;
+
+// Require Router Dependencies
+const newTaskController = require('./backend/routes/newTasks');
+const oldTaskController = require('./backend/routes/oldTasks');
+
+// MongoDB Database Connection
+const DATABASE_URL = "mongodb+srv://admin:abc1234@cluster0.b8vyj.mongodb.net/pomodoro?retryWrites=true&w=majority"
+
+// Database Connection 
+const MONGODB_URI = process.env.MONGODB_URI
 
 // Pull PORT from .env, give default value of 4000
-const { PORT = 4000 } = process.env;
+const { PORT = 4000, MONGODB_URL} = process.env;
 
-// Import Express 
-const express = require('express');
+// Connect to mongoDB
+// mongoose.connect(MONGODB_URL);
 
-// Create Application Object
-const app = express();
+// Mongo Status Listeners
+mongoose.connection
+    .on('connected', () => console.log("Connected to MongoDB"))
+    .on("error", () => console.log("Error with MongoDB: ' +err.message"))
+
+// Mount Middleware
+app.use(cors());
+app.use(morgan("dev"));
+app.use(express.json()); // this recreates req.body from JSON when express is not serving HTML
+app.use(express.urlencoded({extended: false}))
 
 // Routes
-// Index redirect route
-app.get ('/' , (req, res) => {
-    res.send('Hello and welcome to the Pomodoro App');
-});
+app.use ('/pomodoro' , require('./backend/routes/pomodoro'));
+app.use ('/pomodoro/newTask' , require('./backend/routes/newTasks'));
+app.use ('/pomodoro/oldTask' , require('./backend/routes/oldTasks'));
 
-// Listener
-app.listen(PORT, () => console.log(`listening on:, PORT ${PORT}`));
+
+
+// Express Listener
+app.listen(PORT, () => console.log(`Express is listening on:, PORT ${PORT}`));
