@@ -1,13 +1,13 @@
 // Dependencies
 const express = require("express");
 const router = express.Router();
-const { newTasks } = require("../controllers/oldTaskController");
+const { newTasks, oldTasks } = require("../controllers/oldTaskController");
 const { setTasks } = require("../controllers/oldTaskController");
 const { updateTasks } = require("../controllers/oldTaskController");
 const { deleteTasks } = require("../controllers/oldTaskController");
 
 // Index and Create Route
-router.route("/").get(newTasks).post(setTasks);
+router.route("/").get(oldTasks).post(setTasks);
 // Index Route
 //  router.get('/', newTasks);
 // Create Route

@@ -1,14 +1,10 @@
-// Require Dependencies 
-const mongoose = require('mongoose');
-
-// Initializes Shortcut variable
-const Schema = mongoose.Schema;
+// Require Dependencies
+const mongoose = require("mongoose");
 
 // Initializes Schema
-const oldTaskSchema = new Schema({
-    oldTask: Array
+const oldTaskSchema = mongoose.Schema({
+  oldTask: Array,
 });
 
-
 // Export Model
-module.exports = mongoose.model('OldTask', oldTaskSchema)
+module.exports = mongoose.model("OldTask", oldTaskSchema);

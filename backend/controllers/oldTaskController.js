@@ -1,35 +1,53 @@
-// description: Get task
+const oldTask = require("../models/oldTask");
+const OldTask = require("../models/oldTask");
+
+// description: Get an old task
 // route: GET  /pomodoro/oldTask
 // access: public
-const newTasks = (req, res) => {
-  console.log(req.body);
-  res.json({ message: "Old Tasks" });
+const oldTasks = async (req, res) => {
+  try {
+    res.json(await OldTask.find({}));
+  } catch (error) {
+    res.status(400).json(error);
+  }
 };
 
-// description: Set task
+// description: Set/create an old task
 // route: POST  /pomodoro/oldTask
 // access: private
-const setTasks = (req, res) => {
-  res.json({ message: "New Tasks" });
+const setTasks = async (req, res) => {
+  try {
+    res.json(await oldTask.create(req.body));
+  } catch (error) {
+    res.status(400).json(error);
+  }
 };
 
-// description: Update task
+// description: Update an old task
 // route: UPDATE  /pomodoro/oldTask/:id
 // access: private
-const updateTasks = (req, res) => {
-  res.json({ message: "Update Tasks" });
+const updateTasks = async (req, res) => {
+  try {
+    res.json(await oldTask.findByIdAndUpdate(req.params.id, req.body));
+  } catch (error) {
+    res.status(400).json(error);
+  }
 };
 
-// description: Delete task
+// description: Delete an old task
 // route: DELETE  /pomodoro/oldTask/:id
 // access: private
-const deleteTasks = (req, res) => {
-  res.json({ message: "Delete Tasks" });
+const deleteTasks = async (req, res) => {
+  try {
+    res.json(await oldTask.findByIdAndRemove(req.params.id));
+  } catch (error) {
+    res.status(4000).json(error);
+  }
 };
 
 // Export
 module.exports = {
-  newTasks,
+  oldTasks,
   setTasks,
   updateTasks,
   deleteTasks,
