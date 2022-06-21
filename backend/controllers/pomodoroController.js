@@ -1,27 +1,44 @@
-// description: Start
+const Pomodoro = require("../models/pomodoro");
+
 // route: GET  /pomodoro
+// description: Start
 // access: public
-const mainTimer = (req, res) => {
-  res.json({ message: "Main Timer" });
+const getPomodoro = async (req, res) => {
+  try {
+    res.json(await Pomodoro.find({}));
+  } catch (error) {
+    //send error
+    res.status(400).json(error);
+  }
 };
 
-// description: Set task
 // route: POST  /pomodoro
+// description: Set task
 // access: public
-const setTimer = (req, res) => {
-  res.json({ message: "Set Timer" });
+const setPomodoro = async (req, res) => {
+  try {
+    res.json(await Pomodoro.create(req.body));
+  } catch (error) {
+    //send error
+    res.status(400).json(error);
+  }
 };
 
-// description: Update task
 // route: UPDATE  /pomodoro/:id
+// description: Update task
 // access: private
-const updateTimer = (req, res) => {
-  res.json({ message: "Update Timer" });
+const updatePomodoro = async (req, res) => {
+  try {
+    res.json(await Pomodoro.findByIdAndUpdate(req.params.id, req.body));
+  } catch (error) {
+    //send error
+    res.status(400).json(error);
+  }
 };
 
 // Export
 module.exports = {
-  mainTimer,
-  setTimer,
-  updateTimer,
+  getPomodoro,
+  setPomodoro,
+  updatePomodoro,
 };
