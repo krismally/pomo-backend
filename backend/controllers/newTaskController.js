@@ -41,7 +41,7 @@ const deleteTasks = async (req, res) => {
   try {
     res.json(await NewTask.findByIdAndRemove(req.params.id));
   } catch (error) {
-    res.status(400).json(errror);
+    res.status(400).json(error);
   }
 };
 
