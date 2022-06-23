@@ -1,7 +1,7 @@
 // Dependencies
 const express = require("express");
 const router = express.Router();
-const { newTasks, oldTasks } = require("../controllers/oldTaskController");
+const { oldTasks } = require("../controllers/oldTaskController");
 const { setTasks } = require("../controllers/oldTaskController");
 const { updateTasks } = require("../controllers/oldTaskController");
 const { deleteTasks } = require("../controllers/oldTaskController");
