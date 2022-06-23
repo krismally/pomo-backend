@@ -9,7 +9,7 @@ const app = express();
 const connectDB = require("./backend/config/db")
 
 // Pull PORT from .env to run on port 4000.
-const { PORT = 4000 } = process.env;
+const { PORT = 4000 } = process.env || 4000;
 
 // Database Connection
 connectDB()
@@ -19,11 +19,6 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json()); // this recreates req.body from JSON when express is not serving HTML
 app.use(express.urlencoded({ extended: false }));
-
-// Require Router Dependencies
-const newTaskController = require("./backend/routes/newTasks");
-const oldTaskController = require("./backend/routes/oldTasks");
-const pomodoroController = require("./backend/routes/pomodoros");
 
 // Router Routes
 app.use("/pomodoro", require("./backend/routes/pomodoros"));
