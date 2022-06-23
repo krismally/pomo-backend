@@ -21,7 +21,6 @@ app.use(express.json()); // this recreates req.body from JSON when express is no
 app.use(express.urlencoded({ extended: false }));
 
 // Router Routes
-app.use("/pomodoro", require("./backend/routes/pomodoros"));
 app.use("/pomodoro/newTask", require("./backend/routes/newTasks"));
 app.use("/pomodoro/oldTask", require("./backend/routes/oldTasks"));
 
